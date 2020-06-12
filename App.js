@@ -1,8 +1,8 @@
 class Product {
-    constructor(name, price, shop) {
+    constructor(name, model, price) {
         this.name = name;
+        this.model = model;
         this.price = price;
-        this.shop = shop;
     }
 }
 
@@ -10,8 +10,17 @@ class UI {
     addProduct(product) {
         const productList = document.getElementById('product-list');
         const element = document.createElement('div');
-        element.innerHTML = '
-        ';
+        element.innerHTML = "
+        <div class="card text-center mb-4">
+        <div class="card-body">
+            <strong>    Product name</strong>: ${product.name}
+            <str    ong>Model</strong>: ${product.model}
+                <strong>Product Price</strong>: ${product.price}
+            </div>
+        </div>
+        ";
+        productList.appendChild(element);
+
     }
 
     deleteProduct() {
@@ -28,12 +37,17 @@ document.getElementById('product-form')
     .addEventListener('submit', 
         function(event) {
             const name = document.getElementById('name').value;
+            const model = document.getElementById('model').value;
             const price = document.getElementById('price').value;
-            const shop = document.getElementById('shop').value;
+
+            const product = new Product(name, model, price);
             
-            const product = new Product(name, price, shop);
+            const ui = new UI();
+            ui.addProduct(product);
+
+            event.preventDefault();//Nos permite cancelar el evento de refrescar la pagina
 
 
-
-            event.preventDefault();
 });
+
+39.:04
